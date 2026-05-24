@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --page: #f7f9fc;
+  --page-accent: #eaf1ff;
+  --panel: rgb(255 255 255 / 0.84);
+  --border: #e4e9f1;
+  --ink: #171d2a;
+  --muted: #667286;
+  --accent: #6f8fca;
+  --accent-soft: #eef4ff;
+  --pink-soft: #f3e4ec;
+}
+
+.dark {
+  --page: #121722;
+  --page-accent: #1c2739;
+  --panel: rgb(23 30 43 / 0.88);
+  --border: #2a3446;
+  --ink: #edf2fa;
+  --muted: #adb7c8;
+  --accent: #9cb8ed;
+  --accent-soft: #202f48;
+  --pink-soft: #302633;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background:
+      radial-gradient(circle at 90% 6%, var(--pink-soft), transparent 24rem),
+      radial-gradient(circle at 8% 18%, var(--page-accent), transparent 26rem),
+      var(--page);
+    color: var(--ink);
+    font-family: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .site-panel {
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background: var(--panel);
+    box-shadow: 0 14px 42px rgb(31 44 68 / 0.045);
+  }
+
+  .muted {
+    color: var(--muted);
+  }
+
+  .accent-link {
+    color: var(--accent);
+  }
+
+  .prose-reading {
+    color: var(--ink);
+    line-height: 1.85;
+  }
+
+  .prose-reading :where(h2, h3) {
+    margin-block: 2rem 0.8rem;
+    font-weight: 650;
+  }
+
+  .prose-reading :where(p, ul, ol, pre) {
+    margin-block: 1rem;
+  }
+
+  .prose-reading :where(ul, ol) {
+    padding-inline-start: 1.35rem;
+  }
+
+  .prose-reading a {
+    color: var(--accent);
+  }
+
+  .prose-reading pre {
+    overflow-x: auto;
+    border-radius: 0.9rem;
+    padding: 1rem;
+  }
+}
