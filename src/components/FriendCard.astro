@@ -1,0 +1,12 @@
+---
+import type { FriendLink } from '../data/links';
+
+const { friend } = Astro.props as { friend: FriendLink };
+---
+<a class="site-panel flex items-center gap-4 p-5 transition hover:border-[var(--accent)]" href={friend.href} target="_blank" rel="noreferrer">
+  <img class="h-14 w-14 rounded-xl object-cover" src={friend.avatar ?? '/avatar-placeholder.svg'} alt={`${friend.name} 头像`} onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />
+  <div>
+    <h2 class="font-semibold">{friend.name}</h2>
+    <p class="mt-1 text-sm muted">{friend.description}</p>
+  </div>
+</a>

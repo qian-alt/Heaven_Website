@@ -1,0 +1,22 @@
+---
+import ExperienceCard from '../components/ExperienceCard.astro';
+import ProfileHero from '../components/ProfileHero.astro';
+import { experiences } from '../data/experiences';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="关于" description="个人简介、学习方向与联系方式">
+  <main class="mx-auto max-w-4xl px-5 pb-14">
+    <section class="site-panel p-6 sm:p-9">
+      <ProfileHero />
+      <div class="mt-10 space-y-4 leading-8 muted">
+        <h2 class="text-xl font-semibold text-[var(--ink)]">关于我</h2>
+        <p>我是一名正在学习计算机技术的学生，关注 Web 开发与用项目解决实际问题的过程。</p>
+        <p>这个网站会持续收录我的技术笔记、阶段总结与项目实践，也保留一些属于个人兴趣的表达。</p>
+      </div>
+      <h2 class="mt-10 text-xl font-semibold">经历</h2>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        {experiences.map((experience) => <ExperienceCard experience={experience} />)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
