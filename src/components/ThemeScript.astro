@@ -5,6 +5,14 @@
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const dark = stored ? stored === 'dark' : prefersDark;
     document.documentElement.classList.toggle('dark', dark);
+    const syncToggleLabels = () => {
+      const label = document.documentElement.classList.contains('dark') ? '切换到浅色主题' : '切换到深色主题';
+      document.querySelectorAll('[data-theme-toggle]').forEach((control) => {
+        control.setAttribute('aria-label', label);
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', syncToggleLabels);
 
     document.addEventListener('click', (event) => {
       if (!(event.target instanceof Element)) return;
@@ -13,9 +21,7 @@
 
       const nextDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem(storageKey, nextDark ? 'dark' : 'light');
-      document.querySelectorAll('[data-theme-toggle]').forEach((control) => {
-        control.setAttribute('aria-label', nextDark ? '切换到浅色主题' : '切换到深色主题');
-      });
+      syncToggleLabels();
     });
   })();
 </script>
