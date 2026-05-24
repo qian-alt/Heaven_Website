@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+const date = post.data.publishedAt.toLocaleDateString('zh-CN');
+---
+<article class="border-b border-dashed py-4 last:border-none">
+  <a class="block font-semibold hover:text-[var(--accent)]" href={`/blog/${post.id}/`}>{post.data.title}</a>
+  <p class="mt-1 text-sm muted">{post.data.description}</p>
+  <p class="mt-2 text-xs muted">{date} · {post.data.tags.join(' / ')}</p>
+</article>

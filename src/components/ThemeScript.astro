@@ -1,0 +1,21 @@
+<script is:inline>
+  (() => {
+    const storageKey = 'heaven-theme';
+    const stored = localStorage.getItem(storageKey);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const dark = stored ? stored === 'dark' : prefersDark;
+    document.documentElement.classList.toggle('dark', dark);
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest('[data-theme-toggle]');
+      if (!button) return;
+
+      const nextDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem(storageKey, nextDark ? 'dark' : 'light');
+      document.querySelectorAll('[data-theme-toggle]').forEach((control) => {
+        control.setAttribute('aria-label', nextDark ? '切换到浅色主题' : '切换到深色主题');
+      });
+    });
+  })();
+</script>

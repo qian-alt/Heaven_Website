@@ -1,0 +1,16 @@
+---
+import { site } from '../data/site';
+---
+<section class="flex flex-col gap-6 sm:flex-row sm:items-center">
+  <img class="h-28 w-28 rounded-2xl border object-cover" src={site.avatar} alt={`${site.name} 的头像`} onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight">{site.name}</h1>
+    <p class="mt-1 muted">{site.tagline}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm">{site.location}</span>
+      {site.socials.map((social) => (
+        <a class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm" href={social.href} target="_blank" rel="noreferrer">{social.label}</a>
+      ))}
+    </div>
+  </div>
+</section>

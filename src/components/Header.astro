@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+<header class="mx-auto flex h-20 max-w-6xl items-center justify-between px-5">
+  <a class="text-xl font-bold tracking-tight" href="/">{site.title}</a>
+  <nav aria-label="主导航" class="hidden items-center gap-1 md:flex">
+    {site.nav.map((item) => (
+      <a
+        href={item.href}
+        aria-current={isActive(item.href) ? 'page' : undefined}
+        class:list={['rounded-xl px-4 py-2 muted transition hover:text-[var(--ink)]', isActive(item.href) && 'site-panel !text-[var(--ink)]']}
+      >
+        {item.label}
+      </a>
+    ))}
+    <button class="ml-2 rounded-xl border bg-[var(--panel)] px-3 py-2" type="button" data-theme-toggle aria-label="切换主题">◐</button>
+  </nav>
+  <details class="relative md:hidden">
+    <summary class="cursor-pointer list-none rounded-xl border bg-[var(--panel)] px-3 py-2" aria-label="打开菜单">☰</summary>
+    <nav aria-label="移动端导航" class="site-panel absolute right-0 top-12 z-10 flex min-w-40 flex-col p-2">
+      {site.nav.map((item) => <a class="rounded-lg px-4 py-2" href={item.href}>{item.label}</a>)}
+      <button class="rounded-lg px-4 py-2 text-left" type="button" data-theme-toggle aria-label="切换主题">切换主题</button>
+    </nav>
+  </details>
+</header>

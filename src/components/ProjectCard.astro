@@ -1,0 +1,19 @@
+---
+import type { Project } from '../data/projects';
+
+const { project } = Astro.props as { project: Project };
+---
+<article class="site-panel flex h-full flex-col p-5">
+  {project.cover && <img class="mb-4 aspect-video rounded-xl object-cover" src={project.cover} alt="" onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />}
+  <h3 class="text-lg font-semibold">{project.title}</h3>
+  <p class="mt-2 grow text-sm muted">{project.description}</p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    {project.technologies.map((technology) => <span class="rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs">{technology}</span>)}
+  </div>
+  {(project.repository || project.demo) && (
+    <div class="mt-5 flex gap-4 text-sm accent-link">
+      {project.repository && <a href={project.repository} target="_blank" rel="noreferrer">源码</a>}
+      {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">预览</a>}
+    </div>
+  )}
+</article>
