@@ -12,9 +12,9 @@
   "dependencies": {
     "@astrojs/rss": "latest",
     "@astrojs/sitemap": "latest",
-    "@tailwindcss/vite": "latest",
+    "@tailwindcss/vite": "4.2.1",
     "astro": "latest",
-    "tailwindcss": "latest",
+    "tailwindcss": "4.2.1",
     "zod": "latest"
   },
   "devDependencies": {
