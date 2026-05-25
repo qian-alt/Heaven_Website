@@ -8,19 +8,19 @@ const date = post.data.publishedAt.toLocaleDateString('zh-CN', {
   day: 'numeric',
 });
 ---
-<article class="group relative overflow-hidden rounded-3xl border bg-[var(--panel)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgb(31_44_68_/_0.09)]">
+<article class:list={['post-card group', { 'post-card--covered': post.data.cover }]}>
   {post.data.cover && (
     <>
       <img
-        class="absolute inset-y-0 right-0 hidden h-full w-2/5 object-cover opacity-40 sm:block"
+        class="post-card__media"
         src={post.data.cover}
         alt=""
         onerror="this.style.display='none'"
       />
-      <div class="absolute inset-0 hidden bg-gradient-to-r from-[var(--panel)] via-[var(--panel)]/95 to-transparent sm:block"></div>
+      <div class="post-card__fade" aria-hidden="true"></div>
     </>
   )}
-  <a class="relative flex min-h-52 flex-col justify-between p-6 sm:p-8" href={`/blog/${post.id}/`}>
+  <a class="post-card__content" href={`/blog/${post.id}/`}>
     <div>
       <div class="flex flex-wrap items-center gap-2 text-sm muted">
         <time datetime={post.data.publishedAt.toISOString()}>{date}</time>

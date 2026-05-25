@@ -5,6 +5,7 @@ publishedAt: 2026-05-24
 tags: ["Web", "记录"]
 collection: "学习记录"
 pinned: true
+cover: /blog/hello-world-cover.webp
 ---
 
 欢迎来到我的个人网站。这里将记录我的学习过程、实践项目，以及值得慢慢整理下来的思考。
