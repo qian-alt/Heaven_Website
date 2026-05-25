@@ -40,7 +40,7 @@ The calculated percentage is clamped so it is:
 - Between `0.0%` and `100.0%` during the date interval.
 - `100.0%` after the end date.
 
-The component owns this date logic so the two localized pages cannot drift apart.
+The shared progress utility owns this date logic so the two localized pages cannot drift apart. Since the Astro site is statically generated, the component renders an initial build-time value and updates that value in the browser on page load, ensuring the displayed progress reflects the visitor's current date rather than the deployment date.
 
 ## Layout And Styling
 
@@ -58,7 +58,8 @@ Create a reusable `StudyProgress` Astro component that:
 
 - Accepts localized `title` and `subtitle` props.
 - Uses the fixed university date interval internally.
-- Calculates the clamped display percentage.
+- Renders an initial calculated display percentage.
+- Runs a small client-side update on page load using the same progress utility.
 - Renders visual and accessible progress information.
 
 Each About page imports the component and supplies only localized labels.
@@ -74,5 +75,6 @@ Each About page imports the component and supplies only localized labels.
 
 - Add tests for the date-to-percentage calculation at start, during, and after the interval.
 - Verify both localized About templates include the shared progress component with appropriate translated labels.
+- Verify the component marks percentage, fill, and accessible value nodes for browser-time synchronization.
 - Run the full Vitest suite and Astro production build.
 - Inspect `/about` and `/en/about` in the Codex browser at desktop and mobile widths, including light/dark compatibility where feasible.
