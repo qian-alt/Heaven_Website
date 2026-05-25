@@ -6,7 +6,10 @@
     const dark = stored ? stored === 'dark' : prefersDark;
     document.documentElement.classList.toggle('dark', dark);
     const syncToggleLabels = () => {
-      const label = document.documentElement.classList.contains('dark') ? '切换到浅色主题' : '切换到深色主题';
+      const english = document.documentElement.lang === 'en';
+      const label = document.documentElement.classList.contains('dark')
+        ? (english ? 'Switch to light theme' : '切换到浅色主题')
+        : (english ? 'Switch to dark theme' : '切换到深色主题');
       document.querySelectorAll('[data-theme-toggle]').forEach((control) => {
         control.setAttribute('aria-label', label);
       });

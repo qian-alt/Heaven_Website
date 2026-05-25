@@ -10,6 +10,7 @@ const blog = defineCollection({
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
     tags: z.array(z.string().min(1)).min(1),
+    collection: z.string().min(1),
     draft: z.boolean().default(false),
     pinned: z.boolean().default(false),
     cover: z.string().optional(),

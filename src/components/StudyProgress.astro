@@ -1,0 +1,53 @@
+---
+import { calculateStudyProgress, STUDY_END_DATE, STUDY_START_DATE } from '../lib/study-progress';
+
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+const value = calculateStudyProgress();
+const displayValue = `${value.toFixed(1)}%`;
+const titleId = `study-progress-${title.toLowerCase().replaceAll(/\s+/g, '-')}`;
+---
+<section class="study-progress site-panel" aria-labelledby={titleId}>
+  <div class="study-progress__header">
+    <div>
+      <h2 class="text-xl font-semibold" id={titleId}>{title}</h2>
+      <p class="mt-1 muted">{subtitle}</p>
+    </div>
+    <p class="study-progress__value" data-study-progress-value>{displayValue}</p>
+  </div>
+  <div
+    class="study-progress__track"
+    role="progressbar"
+    aria-labelledby={titleId}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow={value.toFixed(1)}
+    data-study-progress-bar
+  >
+    <span class="study-progress__fill" style={`width: ${value}%`} data-study-progress-fill></span>
+  </div>
+  <div class="study-progress__dates muted">
+    <span>{STUDY_START_DATE}</span>
+    <span>{STUDY_END_DATE}</span>
+  </div>
+</section>
+<script>
+  import { calculateStudyProgress } from '../lib/study-progress';
+
+  for (const bar of document.querySelectorAll('[data-study-progress-bar]')) {
+    if (!(bar instanceof HTMLElement)) continue;
+
+    const value = calculateStudyProgress();
+    const card = bar.closest('.study-progress');
+    const label = card?.querySelector('[data-study-progress-value]');
+    const fill = bar.querySelector('[data-study-progress-fill]');
+
+    bar.setAttribute('aria-valuenow', value.toFixed(1));
+    if (label instanceof HTMLElement) label.textContent = `${value.toFixed(1)}%`;
+    if (fill instanceof HTMLElement) fill.style.width = `${value}%`;
+  }
+</script>

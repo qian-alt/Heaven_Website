@@ -1,29 +1,28 @@
 ---
-import { getCollection } from 'astro:content';
-import EmptyState from '../components/EmptyState.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
-import PostCard from '../components/PostCard.astro';
 import ProfileHero from '../components/ProfileHero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { experiences } from '../data/experiences';
 import { projects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { filterPublishedPosts, sortPosts } from '../lib/content';
 
-const posts = sortPosts(filterPublishedPosts(await getCollection('blog'))).slice(0, 4);
 const featuredProjects = projects.filter((project) => project.featured).slice(0, 4);
 ---
 <BaseLayout>
-  <main class="mx-auto grid max-w-6xl gap-6 px-5 pb-8 md:grid-cols-[minmax(0,1fr)_21rem]">
-    <section class="site-panel p-6 sm:p-8">
+  <main class="mx-auto max-w-5xl px-5 pb-8">
+    <section class="home-shell px-1 pt-4 sm:px-0 sm:pt-8">
       <ProfileHero />
-      <section class="mt-10">
+      <section class="home-about mt-10">
         <h2 class="text-xl font-semibold">关于我</h2>
-        <p class="mt-3 leading-7 muted">你好，我是一名正在探索计算机技术的学生。这里记录我的学习过程、实践项目，以及一些认真写下的思考。</p>
+        <div class="home-about__content">
+          <p class="home-about__role muted">学生 /</p>
+          <p class="home-about__intro muted">我是一名来自江西财经大学的网络空间安全专业的在读生，是 24 级。</p>
+          <a class="home-about__link" href="/about">更多关于我 <span aria-hidden="true">›</span></a>
+        </div>
       </section>
-      <section class="mt-9">
-        <h2 class="text-xl font-semibold">学习经历</h2>
-        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <section class="mt-9 grid gap-4 md:grid-cols-[8.5rem_minmax(0,1fr)] md:gap-5">
+        <h2 class="text-xl font-semibold md:pt-4">学习经历</h2>
+        <div class="grid gap-3">
           {experiences.map((experience) => <ExperienceCard experience={experience} />)}
         </div>
       </section>
@@ -37,14 +36,5 @@ const featuredProjects = projects.filter((project) => project.featured).slice(0,
         </div>
       </section>
     </section>
-    <aside class="site-panel h-fit p-6">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xl font-semibold">最新文章</h2>
-        <a class="text-sm accent-link" href="/blog">全部 →</a>
-      </div>
-      <div class="mt-3">
-        {posts.length ? posts.map((post) => <PostCard post={post} />) : <EmptyState message="还没有公开文章。" />}
-      </div>
-    </aside>
   </main>
 </BaseLayout>

@@ -3,20 +3,22 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ThemeScript from '../components/ThemeScript.astro';
 import { site } from '../data/site';
+import type { Locale } from '../lib/locale';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   type?: 'website' | 'article';
+  locale?: Locale;
 }
 
-const { title = site.title, description = site.description, type = 'website' } = Astro.props;
+const { title = site.title, description = site.description, type = 'website', locale = 'zh' } = Astro.props;
 const pageTitle = title === site.title ? title : `${title} | ${site.title}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 ---
 <!doctype html>
-<html lang="zh-CN">
+<html lang={locale === 'en' ? 'en' : 'zh-CN'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
     <ThemeScript />
   </head>
   <body>
-    <Header />
+    <Header locale={locale} />
     <slot />
     <Footer />
   </body>

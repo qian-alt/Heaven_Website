@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StudyProgress from '../../components/StudyProgress.astro';
+import { englishProfile } from '../../data/site.en';
+---
+<BaseLayout locale="en" title="About" description={englishProfile.description}>
+  <main class="mx-auto max-w-4xl px-5 pb-14">
+    <section class="site-panel p-6 sm:p-9">
+      <section class="flex flex-col gap-6 sm:flex-row sm:items-center">
+        <img class="h-28 w-28 rounded-2xl border object-cover" src={englishProfile.avatar} alt={`${englishProfile.name}'s avatar`} onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight">{englishProfile.name}</h1>
+          <p class="mt-1 muted">{englishProfile.tagline}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm">{englishProfile.location}</span>
+            {englishProfile.socials.map((social) => (
+              <a class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm" href={social.href} target="_blank" rel="noreferrer">{social.label}</a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div class="mt-10 space-y-4 leading-8 muted">
+        <h2 class="text-xl font-semibold text-[var(--ink)]">About Me</h2>
+        {englishProfile.about.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+
+      <StudyProgress title="University Progress" subtitle="Stay curious, grow steadily." />
+
+      <section class="mt-10 grid gap-4 md:grid-cols-[8.5rem_minmax(0,1fr)] md:gap-5">
+        <h2 class="text-xl font-semibold md:pt-4">Education</h2>
+        <div class="grid gap-3">
+          {englishProfile.experiences.map((experience) => (
+            <article class="rounded-2xl border bg-white/40 p-4 dark:bg-transparent">
+              <h3 class="font-semibold">{experience.institution}</h3>
+              <p class="text-sm muted">{experience.role}</p>
+              <p class="mt-1 text-xs muted">{experience.period}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </section>
+  </main>
+</BaseLayout>

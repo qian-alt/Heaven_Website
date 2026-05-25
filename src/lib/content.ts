@@ -4,6 +4,7 @@ type PostLike = {
     title: string;
     publishedAt: Date;
     tags: string[];
+    collection: string;
     draft?: boolean;
     pinned?: boolean;
   };
@@ -25,4 +26,8 @@ export function sortPosts<T extends PostLike>(posts: T[]): T[] {
 
 export function getAllTags<T extends PostLike>(posts: T[]): string[] {
   return [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+}
+
+export function getAllCollections<T extends PostLike>(posts: T[]): string[] {
+  return [...new Set(posts.map((post) => post.data.collection))].sort();
 }

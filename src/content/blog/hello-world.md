@@ -3,6 +3,7 @@ title: "开始搭建属于自己的个人网站"
 description: "记录这个内容型个人站的设计方向与搭建起点。"
 publishedAt: 2026-05-24
 tags: ["Web", "记录"]
+collection: "学习记录"
 pinned: true
 ---
 

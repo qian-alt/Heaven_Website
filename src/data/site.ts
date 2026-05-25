@@ -17,15 +17,15 @@ const siteSchema = z.object({
 });
 
 export const site = siteSchema.parse({
-  title: 'Heaven.',
-  name: '你的昵称',
-  description: '学生与技术学习者的个人网站，记录学习、项目与文章。',
-  tagline: '学生 / 技术学习者 - 在代码与热爱之间成长',
+  title: "Heaven's Blog",
+  name: 'Heaven',
+  description: '学生 /我是一名来自江西财经大学的网络空间安全专业的在读生，是 24 级。',
+  tagline: ' ',
   location: '中国',
-  avatar: '/avatar-placeholder.svg',
+  avatar: '/avatar.webp',
   socials: [
     { label: 'GitHub', href: 'https://github.com/' },
-    { label: 'Email', href: 'mailto:hello@example.com' },
+    { label: 'Email', href: 'mailto:kdearheaven@gmail.com' },
   ],
   nav: [
     { label: '首页', href: '/' },
