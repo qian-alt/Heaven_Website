@@ -8,6 +8,7 @@ export const englishProfile = {
   role: 'Student, Class of 2024',
   location: 'China',
   avatar: site.avatar,
+  avatarAlt: "Heaven's avatar",
   socials: site.socials,
   intro: 'Undergraduate in Cyberspace Security at Jiangxi University of Finance and Economics.',
   about: [

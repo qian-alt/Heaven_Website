@@ -16,6 +16,7 @@ describe('English page parity', () => {
       'Student, Class of 2024',
       'Undergraduate in Cyberspace Security at Jiangxi University of Finance and Economics.',
     ]);
+    expect(englishProfile.avatarAlt).toBe("Heaven's avatar");
   });
 
   it('renders localized home content through shared visual components', () => {
@@ -37,5 +38,6 @@ describe('English page parity', () => {
   it('allows the shared hero to receive translated profile data', () => {
     expect(hero).toContain('profile?: Profile');
     expect(hero).toContain('const { profile = site }');
+    expect(hero).toContain("profile.avatarAlt ?? `${profile.name} 的头像`");
   });
 });
