@@ -17,12 +17,12 @@ export const experiences = experienceSchema.parse([
     period: 'Sep 2024 - Present',
     // description: '在这里填写自己的专业方向和正在探索的领域。',
   },
-   {
-    institution: '江西财经大学',
-    role: '专业 / 本科生',
-    period: 'Sep 2024 - Present',
-    // description: '在这里填写自己的专业方向和正在探索的领域。',
-  },
+  //  {
+  //   institution: '江西财经大学',
+  //   role: '专业 / 本科生',
+  //   period: 'Sep 2024 - Present',
+  //   // description: '在这里填写自己的专业方向和正在探索的领域。',
+  // },
   // {
   //   institution: '正在学习',
   //   role: 'Web Development',
