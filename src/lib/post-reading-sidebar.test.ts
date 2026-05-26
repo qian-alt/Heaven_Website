@@ -15,6 +15,7 @@ describe('article reading sidebar layout', () => {
 
   it('renders generated headings into the sidebar slot', () => {
     expect(postRoute).toContain('slot="toc"');
+    expect(postRoute).toContain('slot="mobile-toc"');
     expect(postRoute).toContain('post-toc');
     expect(postRoute).toContain('tableOfContents.map');
   });
@@ -25,5 +26,14 @@ describe('article reading sidebar layout', () => {
     expect(styles).toContain('position: sticky;');
     expect(styles).toContain('.post-toc');
     expect(styles).toContain('@media (max-width: 1023px)');
+  });
+
+  it('places a full-width mobile toc between the article header and body', () => {
+    expect(layout).toContain('post-reading__mobile-sidebar');
+    expect(layout).toContain('<slot name="mobile-toc" />');
+    expect(layout.indexOf('post-reading__mobile-sidebar')).toBeGreaterThan(layout.indexOf('</header>'));
+    expect(layout.indexOf('post-reading__mobile-sidebar')).toBeLessThan(layout.indexOf('prose-reading'));
+    expect(styles).toContain('.post-reading__mobile-sidebar');
+    expect(styles).toContain('display: none;');
   });
 });
