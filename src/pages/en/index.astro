@@ -1,28 +1,21 @@
 ---
+import ExperienceCard from '../../components/ExperienceCard.astro';
+import ProfileHero from '../../components/ProfileHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { englishProfile } from '../../data/site.en';
+
+const featuredProjects = englishProfile.projects.filter((project) => project.featured).slice(0, 4);
 ---
 <BaseLayout locale="en" title={englishProfile.title} description={englishProfile.description}>
   <main class="mx-auto max-w-5xl px-5 pb-8">
     <section class="home-shell px-1 pt-4 sm:px-0 sm:pt-8">
-      <section class="flex flex-col gap-6 sm:flex-row sm:items-center">
-        <img class="h-28 w-28 rounded-2xl border object-cover" src={englishProfile.avatar} alt={`${englishProfile.name}'s avatar`} onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />
-        <div>
-          <h1 class="text-3xl font-bold tracking-tight">{englishProfile.name}</h1>
-          <p class="mt-1 muted">{englishProfile.tagline}</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm">{englishProfile.location}</span>
-            {englishProfile.socials.map((social) => (
-              <a class="rounded-xl border bg-[var(--panel)] px-3 py-1.5 text-sm" href={social.href} target="_blank" rel="noreferrer">{social.label}</a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProfileHero profile={englishProfile} />
 
       <section class="home-about mt-10">
         <h2 class="text-xl font-semibold">About</h2>
         <div class="home-about__content">
-          <p class="home-about__role muted">Student /</p>
+          <p class="home-about__role muted">{englishProfile.role} /</p>
           <p class="home-about__intro muted">{englishProfile.intro}</p>
           <a class="home-about__link" href="/en/about">More about me <span aria-hidden="true">›</span></a>
         </div>
@@ -31,13 +24,7 @@ import { englishProfile } from '../../data/site.en';
       <section class="mt-9 grid gap-4 md:grid-cols-[8.5rem_minmax(0,1fr)] md:gap-5">
         <h2 class="text-xl font-semibold md:pt-4">Education</h2>
         <div class="grid gap-3">
-          {englishProfile.experiences.map((experience) => (
-            <article class="rounded-2xl border bg-white/40 p-4 dark:bg-transparent">
-              <h3 class="font-semibold">{experience.institution}</h3>
-              <p class="text-sm muted">{experience.role}</p>
-              <p class="mt-1 text-xs muted">{experience.period}</p>
-            </article>
-          ))}
+          {englishProfile.experiences.map((experience) => <ExperienceCard experience={experience} />)}
         </div>
       </section>
 
@@ -47,15 +34,7 @@ import { englishProfile } from '../../data/site.en';
           <a class="text-sm accent-link" href="/projects">View all →</a>
         </div>
         <div class="mt-4 grid gap-3 sm:grid-cols-2">
-          {englishProfile.projects.map((project) => (
-            <article class="site-panel flex h-full flex-col p-5">
-              <h3 class="text-lg font-semibold">{project.title}</h3>
-              <p class="mt-2 grow text-sm muted">{project.description}</p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                {project.technologies.map((technology) => <span class="rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs">{technology}</span>)}
-              </div>
-            </article>
-          ))}
+          {featuredProjects.map((project) => <ProjectCard project={project} />)}
         </div>
       </section>
     </section>
