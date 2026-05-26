@@ -30,6 +30,16 @@ const tableOfContents = headings.filter((heading) => heading.depth <= 3);
       </ul>
     </nav>
   )}
+  {tableOfContents.length > 0 && (
+    <nav slot="mobile-toc" class="post-toc" aria-label="文章目录">
+      <p class="post-toc__title">目录</p>
+      <ul class="post-toc__links">
+        {tableOfContents.map((heading) => (
+          <li><a class="post-toc__link" href={`#${heading.slug}`}>{heading.text}</a></li>
+        ))}
+      </ul>
+    </nav>
+  )}
   <Content />
   <nav class="mt-12 flex justify-between gap-4 border-t pt-5 text-sm" aria-label="前后文章">
     <span>{previous && <a class="accent-link" href={`/blog/${previous.id}/`}>← {previous.data.title}</a>}</span>

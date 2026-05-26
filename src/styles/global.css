@@ -363,6 +363,10 @@
     padding-top: 0.75rem;
   }
 
+  .post-reading__mobile-sidebar {
+    display: none;
+  }
+
   .post-toc {
     padding: 0.2rem 0 0.2rem 1.25rem;
     border-left: 1px solid var(--border);
@@ -469,9 +473,12 @@
   }
 
   .post-reading__sidebar {
-    position: static;
-    order: -1;
-    padding-top: 0;
+    display: none;
+  }
+
+  .post-reading__mobile-sidebar {
+    display: block;
+    margin-bottom: 2rem;
   }
 
   .post-toc {

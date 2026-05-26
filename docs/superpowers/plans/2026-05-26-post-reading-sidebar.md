@@ -4,7 +4,7 @@
 
 **Goal:** Turn each blog article page into a wider desktop reading layout with a sticky right-hand table of contents and a compact mobile fallback.
 
-**Architecture:** `PostLayout.astro` will own the responsive article shell and expose a named `toc` slot. The dynamic article route will keep deriving headings from rendered Markdown and fill that slot, while `global.css` supplies presentation and breakpoints without changing article data.
+**Architecture:** `PostLayout.astro` will own the responsive article shell and expose desktop and mobile table-of-contents slots. The dynamic article route will keep deriving headings from rendered Markdown and fill those slots, while `global.css` supplies presentation and breakpoints without changing article data.
 
 **Tech Stack:** Astro, Tailwind utility classes, project global CSS, Vitest source-level regression tests
 
@@ -13,8 +13,8 @@
 ## File Structure
 
 - Create `src/lib/post-reading-sidebar.test.ts` to guard the article layout contract and sidebar CSS.
-- Modify `src/layouts/PostLayout.astro` to expose a content column and a named table-of-contents sidebar region.
-- Modify `src/pages/blog/[slug].astro` to place generated heading links into the sidebar slot instead of the article body.
+- Modify `src/layouts/PostLayout.astro` to expose a content column, a desktop table-of-contents sidebar region, and a mobile in-article region.
+- Modify `src/pages/blog/[slug].astro` to place generated heading links into desktop and mobile table-of-contents slots instead of the article body flow.
 - Modify `src/styles/global.css` to style the wide shell, sticky desktop sidebar, compact table of contents, and mobile fallback.
 
 ### Task 1: Lock Down The Article Layout Contract
@@ -41,10 +41,12 @@ describe('article reading sidebar layout', () => {
     expect(layout).toContain('post-reading__article');
     expect(layout).toContain('post-reading__sidebar');
     expect(layout).toContain('<slot name="toc" />');
+    expect(layout).toContain('<slot name="mobile-toc" />');
   });
 
   it('renders generated headings into the sidebar slot', () => {
     expect(postRoute).toContain('slot="toc"');
+    expect(postRoute).toContain('slot="mobile-toc"');
     expect(postRoute).toContain('post-toc');
     expect(postRoute).toContain('tableOfContents.map');
   });
@@ -55,6 +57,12 @@ describe('article reading sidebar layout', () => {
     expect(styles).toContain('position: sticky;');
     expect(styles).toContain('.post-toc');
     expect(styles).toContain('@media (max-width: 1023px)');
+  });
+
+  it('places a full-width mobile toc between the article header and body', () => {
+    expect(layout).toContain('post-reading__mobile-sidebar');
+    expect(layout.indexOf('post-reading__mobile-sidebar')).toBeGreaterThan(layout.indexOf('</header>'));
+    expect(layout.indexOf('post-reading__mobile-sidebar')).toBeLessThan(layout.indexOf('prose-reading'));
   });
 });
 ```
@@ -82,12 +90,15 @@ git commit -m "test: define post reading sidebar layout"
 
 - [ ] **Step 1: Add the article shell and sidebar slot**
 
-Change `PostLayout.astro` so its main area uses:
+Change `PostLayout.astro` so its main area supplies a desktop sidebar and a mobile table of contents immediately below the article header:
 
 ```astro
 <main class="post-reading-shell">
   <article class="post-reading__article site-panel p-6 sm:p-10">
-    <!-- existing article header and default slot -->
+      <!-- existing article header and default slot -->
+      <div class="post-reading__mobile-sidebar">
+        <slot name="mobile-toc" />
+      </div>
   </article>
   <aside class="post-reading__sidebar">
     <slot name="toc" />
@@ -97,7 +108,7 @@ Change `PostLayout.astro` so its main area uses:
 
 - [ ] **Step 2: Move generated directory markup into the sidebar slot**
 
-In `src/pages/blog/[slug].astro`, replace the in-body table-of-contents block with:
+In `src/pages/blog/[slug].astro`, replace the in-body table-of-contents block with a desktop instance and an identical mobile-slotted instance:
 
 ```astro
 {tableOfContents.length > 0 && (
@@ -108,6 +119,11 @@ In `src/pages/blog/[slug].astro`, replace the in-body table-of-contents block wi
         <li><a class="post-toc__link" href={`#${heading.slug}`}>{heading.text}</a></li>
       ))}
     </ul>
+  </nav>
+)}
+{tableOfContents.length > 0 && (
+  <nav slot="mobile-toc" class="post-toc" aria-label="文章目录">
+    <!-- same generated heading links -->
   </nav>
 )}
 ```
@@ -132,6 +148,10 @@ In `src/styles/global.css`, add component rules equivalent to:
   align-self: start;
 }
 
+.post-reading__mobile-sidebar {
+  display: none;
+}
+
 .post-toc {
   border-left: 1px solid var(--border);
   padding: 0.4rem 0 0.4rem 1.25rem;
@@ -145,8 +165,12 @@ In `src/styles/global.css`, add component rules equivalent to:
   }
 
   .post-reading__sidebar {
-    position: static;
-    order: -1;
+    display: none;
+  }
+
+  .post-reading__mobile-sidebar {
+    display: block;
+    margin-bottom: 2rem;
   }
 }
 ```

@@ -14,6 +14,9 @@ const { post } = Astro.props as { post: CollectionEntry<'blog'> };
           {post.data.publishedAt.toLocaleDateString('zh-CN')} · {post.data.tags.join(' / ')}
         </p>
       </header>
+      <div class="post-reading__mobile-sidebar">
+        <slot name="mobile-toc" />
+      </div>
       <div class="prose-reading"><slot /></div>
     </article>
     <aside class="post-reading__sidebar">
