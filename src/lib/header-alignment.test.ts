@@ -6,7 +6,8 @@ const styles = readFileSync(new URL('../styles/global.css', import.meta.url), 'u
 
 describe('wide section header alignment', () => {
   it('marks only blog and projects as wide desktop header routes', () => {
-    expect(header).toContain("currentPath === '/blog' || currentPath === '/projects'");
+    expect(header).toContain("currentPath === '/blog'");
+    expect(header).toContain("currentPath === '/projects'");
     expect(header).toContain("currentPath === '/blog/'");
     expect(header).toContain("currentPath === '/projects/'");
     expect(header).toContain("'floating-header--wide': usesWideHeader");

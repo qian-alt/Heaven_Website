@@ -8,7 +8,11 @@ interface Props {
 
 const { locale = 'zh' } = Astro.props;
 const currentPath = Astro.url.pathname;
-const usesWideHeader = currentPath === '/blog' || currentPath === '/projects';
+const usesWideHeader =
+  currentPath === '/blog' ||
+  currentPath === '/projects' ||
+  currentPath === '/blog/' ||
+  currentPath === '/projects/';
 const navigation = getNavigation(locale);
 const localeHref = getLocaleSwitch(currentPath, locale);
 const languageLabel = locale === 'en' ? 'English' : '中文';
