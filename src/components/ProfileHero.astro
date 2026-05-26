@@ -9,7 +9,7 @@ interface Props {
   profile?: Profile;
 }
 
-const { profile = site } = Astro.props;
+const { profile = site }: Props = Astro.props;
 ---
 <section class="flex flex-col gap-6 sm:flex-row sm:items-center">
   <img class="h-28 w-28 rounded-2xl border object-cover" src={profile.avatar} alt={profile.avatarAlt ?? `${profile.name} 的头像`} onerror="this.setAttribute('src', '/avatar-placeholder.svg')" />
