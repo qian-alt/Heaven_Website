@@ -8,12 +8,17 @@ interface Props {
 
 const { locale = 'zh' } = Astro.props;
 const currentPath = Astro.url.pathname;
+const usesWideHeader = currentPath === '/blog' || currentPath === '/projects';
 const navigation = getNavigation(locale);
 const localeHref = getLocaleSwitch(currentPath, locale);
 const languageLabel = locale === 'en' ? 'English' : '中文';
 const languageAriaLabel = locale === 'en' ? '切换到中文' : '切换到 English';
 ---
-<header class="floating-header" data-site-header data-scrolled="false">
+<header
+  class:list={['floating-header', { 'floating-header--wide': usesWideHeader }]}
+  data-site-header
+  data-scrolled="false"
+>
   <div class="floating-header__bar">
     <a class="text-xl font-bold tracking-tight sm:text-2xl" href={locale === 'en' ? '/en' : '/'}>{site.title}</a>
 
