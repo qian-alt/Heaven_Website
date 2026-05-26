@@ -10,10 +10,26 @@ const { project } = Astro.props as { project: Project };
   <div class="mt-4 flex flex-wrap gap-2">
     {project.technologies.map((technology) => <span class="rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs">{technology}</span>)}
   </div>
-  {(project.repository || project.demo) && (
-    <div class="mt-5 flex gap-4 text-sm accent-link">
-      {project.repository && <a href={project.repository} target="_blank" rel="noreferrer">源码</a>}
-      {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">预览</a>}
+  {(project.demo || project.repository) && (
+    <div class="mt-5 flex flex-wrap gap-2">
+      {project.demo && (
+        <a class="project-action" href={project.demo} target="_blank" rel="noreferrer">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z" />
+          </svg>
+          <span>Site</span>
+        </a>
+      )}
+      {project.repository && (
+        <a class="project-action" href={project.repository} target="_blank" rel="noreferrer">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 19c-4.5 1.4-4.5-2.5-6.3-3" />
+            <path d="M15.8 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.7-1.4 5.7-6.2a4.8 4.8 0 0 0-1.3-3.3 4.4 4.4 0 0 0-.1-3.3s-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.4 0C7.1 2.4 6 2.7 6 2.7A4.4 4.4 0 0 0 5.9 6a4.8 4.8 0 0 0-1.3 3.3c0 4.8 2.9 5.9 5.7 6.2-.5.5-.6 1.1-.6 2V21" />
+          </svg>
+          <span>GitHub</span>
+        </a>
+      )}
     </div>
   )}
 </article>

@@ -17,6 +17,8 @@ export const projects = projectSchema.parse([
     title: '个人博客网站',
     description: '用于分享学习记录与作品的静态个人站。',
     technologies: ['Astro', 'TypeScript', 'Markdown'],
+    demo: 'https://www.dearheaven.cn/',
+    repository: 'https://github.com/qian-alt/Heaven_Website',
     featured: true,
   },
   {
