@@ -30,6 +30,7 @@ describe('localized About site information section', () => {
     expect(component).toContain('https://creativecommons.org/licenses/by-nc-sa/4.0/');
     expect(component).toContain('https://astro.build/');
     expect(component).toContain('https://axi404.top/');
+    expect(component).toContain('</a>{copyrightAfterLicense}');
   });
 
   it('provides responsive presentation hooks for destination cards', () => {
