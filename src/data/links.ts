@@ -51,4 +51,10 @@ export const friendLinks = friendLinkSchema.parse([
     avatar: 'https://s3.bmp.ovh/2026/05/08/i1ptxaZ4.jpg',
     description: '富贵夫斯基',
   },
+  {
+    name: 'MIUMA',
+    href: 'https://www.miuma.top',
+    avatar: 'https://www.miuma.top/images/jt.svg ',
+    description: '睡觉大王',
+  },
 ]);
