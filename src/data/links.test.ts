@@ -8,7 +8,7 @@ describe('friend links catalog', () => {
       expect.objectContaining({ name: '想玩电脑の秋雨样', href: 'https://amqyy.cn/' }),
       expect.objectContaining({ name: 'piterの小窝', href: 'https://npiter.de' }),
       expect.objectContaining({ name: 'woodfish', href: 'https://www.woodfish.site/' }),
-      expect.objectContaining({ name: '江西财经大学网络安全协会', href: 'https://www.wpst.top/' }),
+      expect.objectContaining({ name: '江西财经大学网络安全协会', href: 'https://csec.jxufe.edu.cn/' }),
       expect.objectContaining({ name: '富贵夫斯基', href: 'https://www.fgfsj.top/' }),
     ]));
   });

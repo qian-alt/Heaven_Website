@@ -41,7 +41,7 @@ export const friendLinks = friendLinkSchema.parse([
   },
   {
     name: '江西财经大学网络安全协会',
-    href: 'https://www.wpst.top/',
+    href: 'https://csec.jxufe.edu.cn/',
     avatar: 'https://www.wpst.top/favicon.svg',
     description: '江西财经大学网络安全协会',
   },
