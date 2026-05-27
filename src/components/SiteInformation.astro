@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string;
+  distributionTitle: string;
+  distributionIntro: string;
+  copyrightTitle: string;
+  copyrightBeforeLicense: string;
+  copyrightAfterLicense: string;
+  thirdPartyText: string;
+  themeTitle: string;
+  themePrefix: string;
+  themeMiddle: string;
+  themeSuffix: string;
+}
+
+const {
+  title,
+  distributionTitle,
+  distributionIntro,
+  copyrightTitle,
+  copyrightBeforeLicense,
+  copyrightAfterLicense,
+  thirdPartyText,
+  themeTitle,
+  themePrefix,
+  themeMiddle,
+  themeSuffix,
+} = Astro.props;
+
+const destinations = [
+  {
+    label: 'Vercel',
+    host: 'dearheaven.cn',
+    href: 'https://www.dearheaven.cn/',
+  },
+  {
+    label: 'Cloudflare',
+    host: 'cloudflare.dearheaven.cn',
+    href: 'https://cloudflare.dearheaven.cn/',
+  },
+];
+---
+<section class="site-information">
+  <h2 class="text-xl font-semibold">{title}</h2>
+
+  <section class="site-information__block">
+    <h3 class="site-information__heading">{distributionTitle}</h3>
+    <p class="site-information__paragraph muted">{distributionIntro}</p>
+    <div class="site-information__destinations">
+      {destinations.map((destination) => (
+        <a
+          class="site-information__destination"
+          href={destination.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div>
+            <p class="site-information__provider">{destination.label}</p>
+            <p class="site-information__host muted">{destination.host}</p>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="site-information__block">
+    <h3 class="site-information__heading">{copyrightTitle}</h3>
+    <p class="site-information__paragraph muted">
+      {copyrightBeforeLicense}
+      <a
+        class="accent-link"
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        CC BY-NC-SA 4.0
+      </a>
+      {copyrightAfterLicense}
+    </p>
+    <p class="site-information__paragraph muted">{thirdPartyText}</p>
+  </section>
+
+  <section class="site-information__block">
+    <h3 class="site-information__heading">{themeTitle}</h3>
+    <p class="site-information__paragraph muted">
+      {themePrefix}<a class="accent-link" href="https://astro.build/" target="_blank" rel="noreferrer">Astro</a>{themeMiddle}<a
+        class="accent-link"
+        href="https://axi404.top/"
+        target="_blank"
+        rel="noreferrer"
+      >Axi's Blog</a>{themeSuffix}
+    </p>
+  </section>
+</section>

@@ -1,6 +1,7 @@
 ---
 import ExperienceCard from '../components/ExperienceCard.astro';
 import ProfileHero from '../components/ProfileHero.astro';
+import SiteInformation from '../components/SiteInformation.astro';
 import StudyProgress from '../components/StudyProgress.astro';
 import { experiences } from '../data/experiences';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -21,6 +22,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           {experiences.map((experience) => <ExperienceCard experience={experience} />)}
         </div>
       </section>
+      <SiteInformation
+        title="站点信息"
+        distributionTitle="网页分发"
+        distributionIntro="为了提供稳定的访问体验，本站提供以下部署入口，内容保持同步更新。"
+        copyrightTitle="版权"
+        copyrightBeforeLicense="除特别说明外，本站原创内容与原创页面设计采用 "
+        copyrightAfterLicense=" 协议授权。转载或改编时请注明作者与原文链接，不得用于商业目的，并以相同协议分享。"
+        thirdPartyText="本站引用的第三方图片、字体、商标与其他素材，其权利归原作者或权利人所有。如有侵权，请联系我删除。"
+        themeTitle="主题"
+        themePrefix="本站基于 "
+        themeMiddle=" 构建，界面设计参考 "
+        themeSuffix="，并结合个人内容重新实现。"
+      />
     </section>
   </main>
 </BaseLayout>

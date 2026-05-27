@@ -1,6 +1,7 @@
 ---
 import ExperienceCard from '../../components/ExperienceCard.astro';
 import ProfileHero from '../../components/ProfileHero.astro';
+import SiteInformation from '../../components/SiteInformation.astro';
 import StudyProgress from '../../components/StudyProgress.astro';
 import { englishProfile } from '../../data/site.en';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -23,6 +24,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           {englishProfile.experiences.map((experience) => <ExperienceCard experience={experience} />)}
         </div>
       </section>
+      <SiteInformation
+        title="Site Information"
+        distributionTitle="Distribution"
+        distributionIntro="To provide a reliable visiting experience, this site is available through the following synchronized deployments."
+        copyrightTitle="Copyright"
+        copyrightBeforeLicense="Unless otherwise stated, original content and original page design on this site are licensed under "
+        copyrightAfterLicense=". Attribution and a link to the original are required; commercial use is not permitted; adaptations must use the same license."
+        thirdPartyText="Third-party images, fonts, trademarks, and other materials remain the property of their respective rights holders. Please contact me for removal if any material infringes your rights."
+        themeTitle="Theme"
+        themePrefix="This site is built with "
+        themeMiddle=". Its interface design references "
+        themeSuffix=" and has been reimplemented for my own content."
+      />
     </section>
   </main>
 </BaseLayout>
