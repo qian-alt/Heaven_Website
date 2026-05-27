@@ -18,6 +18,18 @@ npm test
 npm run build
 ```
 
+## Writing A New Post
+
+运行下面的命令，自动生成带 frontmatter 的博客草稿：
+
+```powershell
+npm run new:post -- "我的第一篇博客"
+```
+
+文章会创建在 `src/content/blog/我的第一篇博客.md`。新文章默认包含 `draft: true`，写完并准备公开时将它修改为 `draft: false`。
+
+封面图片建议放在 `public/blog/covers/`，正文图片建议放在 `public/blog/<文章文件名>/`，并在 Markdown 中使用 `/blog/...` 路径引用。
+
 ## Updating Content
 
 - 在 `src/content/blog/` 添加 Markdown 或 MDX 文章。
@@ -35,7 +47,9 @@ title: "文章标题"
 description: "文章摘要"
 publishedAt: 2026-05-24
 tags: ["Web"]
+collection: "生活记录"
 draft: false
 pinned: false
+cover: /blog/covers/my-first-post.webp
 ---
 ```
